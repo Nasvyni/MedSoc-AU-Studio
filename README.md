@@ -14,9 +14,9 @@ http://nasvyni.github.io/MedSoc-AU-Studio/
 4. Images: AO3 does not accept uploads and or Base64 data so u gotta host each image elsewhere and replace every `https://YOUR-IMAGE-URL` in the HTML with the real link (*I recommend:* [Catbox.moe](https://catbox.moe), [Imgur](https://imgur.com), [Postimages](https://postimages.org), or Discord image links (right-click image > *Copy Link*).)
 5. Use the **Preview** before posting, the HTML is one line with no inline styles or scripts, so AO3 does not insert stray line breaks, fix whats needed!!
 
-## Penpot
+## I kinda want to change (...)
 
-See the [Penpot Component Specs](https://github.com/Nasvyni/MedSoc-AU-Studio/tree/main/I%20wanna%20get%20PenPot%20components%20specs!) for component specs if you want to expand/tweak the UI by yourself[cite: 2]!
+See the [Penpot Component Specs](https://github.com/Nasvyni/MedSoc-AU-Studio/tree/main/I%20wanna%20get%20PenPot%20components%20specs!) for component specs if you want to expand/tweak the UI by yourself!
 
 ---
 
