@@ -8,11 +8,11 @@ http://nasvyni.github.io/MedSoc-AU-Studio/
 
 ## How do I apply it on AO3? (Tumblr import coming soon!)
 
-1. On AO3 go to **Dashboard > Skins > Create Work Skin**. Give it a title, paste the contents of `ao3-workskin.css` into the CSS box, and submit
-2. Edit your work. Under **Associations > Select Work Skin**, choose the skin you made
-3. In the chapter editor, switch to **HTML**, and paste the generated markup where the mockup should appear
-4. Images: AO3 does not accept uploads or Base64 data. Host each image elsewhere and replace every `https://YOUR-IMAGE-URL` in the HTML with the real link
-5. Use **Preview** before posting. The generated HTML is one line with no inline styles or scripts, so AO3 does not insert stray line breaks
+1. On AO3 go to **Dashboard > Skins > Create Work Skin**. paste the contents of `ao3-workskin.css` into the CSS box, and submit!
+2. Edit the work u want the css on! Under **Associations > Select Work Skin**, choose the skin you made
+3. in the chapter editor switch to **HTML**, and paste the markup where the mockup should appear
+4. Images: AO3 does not accept uploads and or Base64 data so u gotta host each image elsewhere and replace every `https://YOUR-IMAGE-URL` in the HTML with the real link (*I recommend:* [Catbox.moe](https://catbox.moe), [Imgur](https://imgur.com), [Postimages](https://postimages.org), or Discord image links (right-click image > *Copy Link*).)
+5. Use the **Preview** before posting, the HTML is one line with no inline styles or scripts, so AO3 does not insert stray line breaks, fix whats needed!!
 
 ## Penpot
 
