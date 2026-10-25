@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Medsos AU Studio</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ao3-workskin.css">
+</head>
+<body>
+<header class="bar">
+  <strong>medsos-au-studio</strong>
+  <nav id="tabs" aria-label="Platform">
+    <button data-p="twitter">Twitter / X</button><button data-p="wa">WhatsApp</button><button data-p="ig">Instagram DM</button><button data-p="im">iMessage</button><button data-p="nt">Notes</button>
+  </nav>
+</header>
+<main class="app">
+<aside class="panel" aria-label="Editor">
+  <div data-for="twitter wa ig im">
+    <label>Display name<input data-k="name"></label>
+  </div>
+  <div data-for="twitter"><label>Handle<input data-k="handle"></label></div>
+  <div data-for="wa"><label>Status line<input data-k="status"></label></div>
+  <div data-for="twitter wa ig">
+    <label class="drop">Profile picture<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-f="av"></label>
+  </div>
+  <div data-for="twitter">
+    <label>Theme<select data-k="theme"><option value="light">Light</option><option value="dim">Dim</option><option value="dark">Dark</option></select></label>
+    <label>Post text<textarea data-k="text" rows="4"></textarea></label>
+    <label class="drop">Attached image<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-f="img"></label>
+    <div class="grid2">
+      <label>Replies<input data-k="replies"></label><label>Reposts<input data-k="reposts"></label>
+      <label>Likes<input data-k="likes"></label><label>Views<input data-k="views"></label>
+    </div>
+  </div>
+  <div data-for="twitter im nt"><label>Timestamp<input data-k="time"></label></div>
+  <div data-for="wa ig im">
+    <label>Messages<textarea data-k="chat" rows="7"></textarea></label>
+    <p class="hint">One message per line. Start a line with &gt; for sent messages. Add “ | 9:41 AM” to set a time.</p>
+  </div>
+  <div data-for="im"><label class="check"><input type="checkbox" data-k="sms"> Sent as SMS (green)</label></div>
+  <div data-for="nt">
+    <label>Title<input data-k="title"></label>
+    <label>Note<textarea data-k="note" rows="8"></textarea></label>
+  </div>
+</aside>
+<section class="stage">
+  <div class="canvas"><div id="workskin"><div id="out"></div></div></div>
+  <div class="code">
+    <div><div class="row"><span>AO3 HTML</span><button data-copy="html">Copy AO3 HTML</button></div><textarea id="html" readonly spellcheck="false"></textarea></div>
+    <div><div class="row"><span>Work Skin CSS</span><button data-copy="css">Copy Workskin CSS</button></div><textarea id="css" readonly spellcheck="false"></textarea></div>
+    <p class="hint wide">AO3 blocks uploaded images and Base64. Host your images elsewhere, then replace each YOUR-IMAGE-URL in the HTML with the real link.</p>
+  </div>
+</section>
+</main>
+<script src="script.js"></script>
+</body>
+</html>
