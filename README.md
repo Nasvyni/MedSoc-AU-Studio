@@ -16,7 +16,7 @@ http://nasvyni.github.io/MedSoc-AU-Studio/
 
 ## Penpot
 
-See [`penpot/README.md`](penpot/README.md) for the design kit and how to import it (if you want to expand on my UI)
+See the [Penpot Component Specs](https://github.com/Nasvyni/MedSoc-AU-Studio/tree/main/I%20wanna%20get%20PenPot%20components%20specs!) for component specs if you want to expand/tweak the UI by yourself[cite: 2]!
 
 ---
 
