@@ -2,7 +2,7 @@
 Are you an AU/fic Author? so many apps to choose but they're all pay2use? // An open source website to relieve you of all your AU-app findin duties!
 ---
 
-## Link!
+## Link 2 The Page!
 
 http://nasvyni.github.io/MedSoc-AU-Studio/
 
