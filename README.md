@@ -2,14 +2,11 @@
 Are you an AU/fic Author? so many apps to choose but they're all pay2use? // An open source website to relieve you of all your AU-app findin duties!
 ---
 
-## Use the generator
+## Link!
 
-1. Open the GitHub Pages site for this repo (Settings > Pages > Deploy from branch `main`, folder `/root`).
-2. Pick a platform in the top bar and edit the fields. The preview updates as you type.
-3. Upload a profile picture or attached image by dropping it on the upload box. It is previewed locally and never leaves your browser.
-4. Copy the **AO3 HTML** and **Work Skin CSS** from the two boxes at the bottom.
+http://nasvyni.github.io/MedSoc-AU-Studio/
 
-## Apply it on AO3 (Tumblr import coming soon!)
+## How do I apply it on AO3? (Tumblr import coming soon!)
 
 1. On AO3 go to **Dashboard > Skins > Create Work Skin**. Give it a title, paste the contents of `ao3-workskin.css` into the CSS box, and submit
 2. Edit your work. Under **Associations > Select Work Skin**, choose the skin you made
