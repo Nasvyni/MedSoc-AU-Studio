@@ -30,3 +30,12 @@ textarea{resize:vertical}
 .row button:hover{border-color:#b8b8b8}
 .code textarea{height:120px;margin:0;font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;resize:none}
 @media(max-width:800px){.app{display:block;height:auto}.panel{border:0;border-bottom:1px solid var(--line)}.code{grid-template-columns:1fr}.code>div+div{margin-top:12px}}
+.add{margin:0 0 12px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;font:inherit;cursor:pointer}
+.add:hover{border-color:#b8b8b8}
+.tw{margin-bottom:12px;padding:12px 12px 0;border:1px solid var(--line);border-radius:8px}
+.tw .row b{font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.chips button{padding:5px 9px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--text);font:inherit;cursor:pointer}
+.chips button:hover:not(:disabled){border-color:#b8b8b8}
+.chips button[aria-pressed=true]{border-color:var(--text);font-weight:600}
+.chips button:disabled{color:#b0b0b0;cursor:default}

@@ -1,25 +1,43 @@
 /* medsos-au-studio — AO3 Work Skin. Paste into Dashboard > Skins > Create Work Skin. */
 #workskin .au{margin:1em auto;max-width:420px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.3;box-sizing:border-box;overflow:hidden}
 #workskin .au *{box-sizing:border-box}
+#workskin .au b{font-weight:700}
+#workskin .au i{font-style:italic}
+#workskin .au u{text-decoration:underline}
+
+/* Text formatting (all platforms) */
+#workskin .au b{font-weight:700}
+#workskin .au i{font-style:italic}
+#workskin .au u{text-decoration:underline}
 
 /* Twitter / X */
-#workskin .twt{padding:12px 16px;border:1px solid;border-radius:16px;font-size:15px}
+#workskin .twt{padding:0;border:1px solid;border-radius:16px;font-size:15px}
 #workskin .twt-light{background:#ffffff;color:#0f1419;border-color:#eff3f4}
 #workskin .twt-dim{background:#15202b;color:#ffffff;border-color:#38444d}
 #workskin .twt-dark{background:#000000;color:#e7e9ea;border-color:#2f3336}
 #workskin .twt-light .twt-sub{color:#536471}
 #workskin .twt-dim .twt-sub{color:#8b98a5}
 #workskin .twt-dark .twt-sub{color:#71767b}
-#workskin .twt-head{display:flex;align-items:center}
-#workskin .twt-av{display:block;flex:none;width:48px;height:48px;margin-right:12px;border-radius:50%;background:#cfd9de;object-fit:cover}
-#workskin .twt-name{display:block;font-weight:700;line-height:20px}
-#workskin .twt-sub{display:block;line-height:20px}
-#workskin .twt-text{margin-top:12px;font-size:17px;line-height:24px}
+#workskin .twt-post{display:flex;padding:12px 16px 0}
+#workskin .twt-cont{padding-top:0}
+#workskin .twt-side{display:flex;flex:none;flex-direction:column;align-items:center;width:40px;margin-right:12px}
+#workskin .twt-av{display:block;flex:none;width:40px;height:40px;border-radius:50%;background:#cfd9de;object-fit:cover}
+#workskin .twt-line{flex:1 1 auto;width:2px;margin:4px 0}
+#workskin .twt-light .twt-line{background:#cfd9de}
+#workskin .twt-dim .twt-line{background:#38444d}
+#workskin .twt-dark .twt-line{background:#2f3336}
+#workskin .twt-main{flex:1 1 auto;min-width:0;padding-bottom:12px}
+#workskin .twt-top{line-height:20px}
+#workskin .twt-name{font-weight:700}
+#workskin .twt-handle{margin-left:4px}
+#workskin .twt-lock{display:inline-block;width:10px;margin-left:4px;vertical-align:-1px}
+#workskin .twt-lock-sh{display:block;width:6px;height:4px;margin:0 auto;border:1.5px solid currentColor;border-bottom:0;border-radius:4px 4px 0 0}
+#workskin .twt-lock-bd{display:block;width:10px;height:7px;border-radius:2px;background:currentColor}
+#workskin .twt-text{margin-top:2px;line-height:20px}
 #workskin .twt-img{display:block;width:100%;margin-top:12px;border:1px solid;border-color:inherit;border-radius:16px}
-#workskin .twt-meta{margin-top:12px;padding:0 0 12px;border-bottom:1px solid;border-color:inherit}
-#workskin .twt-stats{padding-top:12px}
-#workskin .twt-stats span{display:inline-block;margin-right:18px}
-#workskin .twt-stats b{font-weight:700}
+#workskin .twt-act{margin-top:12px;font-size:13px;line-height:16px}
+#workskin .twt-act span{display:inline-block;margin-right:16px}
+#workskin .twt-act b{font-weight:700}
 #workskin .twt-light b{color:#0f1419}
 #workskin .twt-dim b{color:#ffffff}
 #workskin .twt-dark b{color:#e7e9ea}
@@ -40,6 +58,10 @@
 #workskin .wa-out .wa-tail{border-top-right-radius:0}
 #workskin .wa-time{float:right;margin:7px 0 -3px 10px;font-size:11px;line-height:11px;color:#667781}
 #workskin .wa-tick{color:#53bdeb}
+#workskin .wa-pb{width:230px}
+#workskin .wa-pic{display:block;width:100%;margin-bottom:4px;border-radius:6px}
+#workskin .wa-pic.ph{height:150px;background:#cfd9de}
+#workskin .wa-pic{display:block;width:240px;max-width:100%;margin-bottom:4px;border-radius:6px}
 
 /* iMessage */
 #workskin .im{padding:12px;border-radius:12px;background:#ffffff;font-size:17px}
@@ -50,6 +72,11 @@
 #workskin .im-bub{max-width:75%;padding:7px 12px;border-radius:18px;background:#e9e9eb;color:#000000;line-height:22px}
 #workskin .im-out .im-bub{background:#007aff;color:#ffffff}
 #workskin .im-sms .im-bub{background:#34c759}
+#workskin .im-pic{display:block;width:220px;max-width:75%;border-radius:18px}
+#workskin .im-pic.ph{height:160px;background:#d1d1d6}
+#workskin .im-pic{display:block;width:240px;max-width:100%;margin-bottom:6px;border-radius:14px}
+#workskin .im-bub.im-photo,#workskin .im-out .im-photo,#workskin .im-sms .im-photo{padding:0;background:none}
+#workskin .im-photo .im-pic{margin-bottom:0;border-radius:18px}
 
 /* Instagram DM */
 #workskin .ig{padding:12px;border:1px solid #dbdbdb;border-radius:12px;background:#ffffff;font-size:14px}
@@ -60,6 +87,7 @@
 #workskin .ig-out{justify-content:flex-end}
 #workskin .ig-bub{max-width:70%;padding:10px 14px;border-radius:22px;background:#efefef;color:#262626;line-height:18px}
 #workskin .ig-out .ig-bub{background:#3797f0;color:#ffffff}
+#workskin .ig-pic{display:block;width:220px;max-width:100%;margin-bottom:4px;border-radius:14px}
 
 /* Notes */
 #workskin .nt{padding:16px 18px;border:1px solid #e5e5ea;border-radius:12px;background:#ffffff;color:#000000;font-size:17px;line-height:22px}
