@@ -19,7 +19,7 @@ I step up to the doorstep. "Hi." It is the only word I can manage- her long, sil
 };
 const T = () => S.tweets[S.ti];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])).replace(/\n/g, '<br>');
-// Escapes first, then turns **b**, *i* and <b>/<i>/<u> into plain tags AO3 accepts.
+// escape first then get ** and **** to html tags so ao3 ok
 const fmt = s => esc(s)
   .replace(/&lt;(\/?)(b|i|u)&gt;/gi, (m, x, t) => `<${x}${t.toLowerCase()}>`)
   .replace(/\*\*([^*]+?)\*\*/g, '<b>$1</b>')
