@@ -4,7 +4,7 @@
 #workskin .au i{font-style:italic}
 #workskin .au u{text-decoration:underline}
 
-/* txt formtssning (all plats) */
+/* formattn all platfrm */
 #workskin .au b{font-weight:700}
 #workskin .au i{font-style:italic}
 #workskin .au u{text-decoration:underline}
@@ -20,7 +20,7 @@
 #workskin .twt-post{display:flex;padding:12px 16px 0}
 #workskin .twt-cont{padding-top:0}
 #workskin .twt-side{display:flex;flex:none;flex-direction:column;align-items:center;width:40px;margin-right:12px}
-#workskin .twt-av{display:block;flex:none;width:40px;height:40px;border-radius:50%;background:#cfd9de;object-fit:cover}
+#workskin .twt-av{display:block;flex:none;min-width:40px;width:40px;height:40px;border-radius:50%;background:#cfd9de}
 #workskin .twt-line{flex:1 1 auto;width:2px;margin:4px 0}
 #workskin .twt-light .twt-line{background:#cfd9de}
 #workskin .twt-dim .twt-line{background:#38444d}
@@ -41,12 +41,13 @@
 #workskin .twt-dim b{color:#ffffff}
 #workskin .twt-dark b{color:#e7e9ea}
 
-/* WA */
+/* wa */
 #workskin .wa{background:#efeae2;border-radius:8px;font-size:14.2px}
-#workskin .wa-top{display:flex;align-items:center;padding:10px 14px;background:#008069;color:#ffffff}
-#workskin .wa-av{display:block;flex:none;width:36px;height:36px;margin-right:10px;border-radius:50%;background:#dfe5e7;object-fit:cover}
+#workskin .wa-top{overflow:hidden;padding:10px 14px;background:#008069;color:#ffffff}
+#workskin .wa-av{display:block;float:left;width:36px;height:36px;margin-right:10px;border-radius:50%;background:#dfe5e7}
+#workskin .wa-who{overflow:hidden}
 #workskin .wa-title{display:block;font-size:16px;font-weight:500}
-#workskin .wa-status{display:block;font-size:12px;opacity:.8}
+#workskin .wa-status{display:block;font-size:12px;color:#cfe6e1}
 #workskin .wa-body{padding:8px 12px 12px}
 #workskin .wa-row{display:flex;margin-bottom:2px}
 #workskin .wa-out{justify-content:flex-end}
@@ -62,7 +63,7 @@
 #workskin .wa-pic.ph{height:150px;background:#cfd9de}
 #workskin .wa-pic{display:block;width:240px;max-width:100%;margin-bottom:4px;border-radius:6px}
 
-/* imessage */
+/* iMessage */
 #workskin .im{padding:12px;border-radius:12px;background:#ffffff;font-size:17px}
 #workskin .im-top{text-align:center;font-size:11px;font-weight:600;color:#000000}
 #workskin .im-time{margin:0 0 10px;text-align:center;font-size:11px;color:#8e8e93}
@@ -77,11 +78,11 @@
 #workskin .im-bub.im-photo,#workskin .im-out .im-photo,#workskin .im-sms .im-photo{padding:0;background:none}
 #workskin .im-photo .im-pic{margin-bottom:0;border-radius:18px}
 
-/* insta */
+/* ig */
 #workskin .ig{padding:12px;border:1px solid #dbdbdb;border-radius:12px;background:#ffffff;font-size:14px}
-#workskin .ig-top{display:flex;align-items:center;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid #efefef}
-#workskin .ig-av{display:block;flex:none;width:32px;height:32px;margin-right:10px;border-radius:50%;background:#dbdbdb;object-fit:cover}
-#workskin .ig-name{font-weight:600;color:#262626}
+#workskin .ig-top{overflow:hidden;padding-bottom:10px;margin-bottom:10px;border-bottom:1px solid #efefef}
+#workskin .ig-av{display:block;float:left;width:32px;height:32px;margin-right:10px;border-radius:50%;background:#dbdbdb}
+#workskin .ig-name{display:block;overflow:hidden;line-height:32px;font-weight:600;color:#262626}
 #workskin .ig-row{display:flex;margin-bottom:3px}
 #workskin .ig-out{justify-content:flex-end}
 #workskin .ig-bub{max-width:70%;padding:10px 14px;border-radius:22px;background:#efefef;color:#262626;line-height:18px}
