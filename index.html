@@ -19,13 +19,14 @@
 <aside class="panel" aria-label="Editor">
   <div data-for="wa" class="wallpaper">
     <label>WhatsApp wallpaper
-      <select data-k="wabg"><option value="doodle">Pattern</option><option value="plain">Plain beige</option><option value="dark">Dark mode</option><option value="custom">Custom color / URL</option></select>
+      <select data-k="wabg"><option value="doodle">Doodle pattern (tinted)</option><option value="solid">Solid color</option><option value="image">Custom image</option><option value="dark">Dark mode</option></select>
     </label>
-    <div id="wacustom" hidden>
-      <label>Wallpaper color<input type="color" data-k="wacolor"></label>
-      <label>Wallpaper image URL (optional)<input data-k="waimg" placeholder="https://files.catbox.moe/…"></label>
-      <p class="hint">A custom wallpaper adds one extra rule to the end of the Work Skin CSS. Re-copy the CSS after changing it.</p>
+    <div id="wacolorrow"><label>Tint / color<input type="color" data-k="wacolor"></label></div>
+    <div id="waimgrow" hidden>
+      <label>Image URL<input data-k="waimg" placeholder="https://files.catbox.moe/…"></label>
+      <label class="drop">Or upload to preview<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-f="waimg"></label>
     </div>
+    <p class="hint">The tint recolors the doodle pattern. Any wallpaper other than the default adds one rule to the end of the Work Skin CSS, so re-copy the CSS after changing it. An uploaded wallpaper only previews, and exports as a placeholder URL for you to replace.</p>
   </div>
   <div data-for="wa ig im"><label>Contact name<input data-k="name"></label></div>
   <div data-for="wa"><label>Status line<input data-k="status"></label></div>
