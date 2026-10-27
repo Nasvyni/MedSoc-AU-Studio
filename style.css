@@ -39,3 +39,5 @@ textarea{resize:vertical}
 .chips button:hover:not(:disabled){border-color:#b8b8b8}
 .chips button[aria-pressed=true]{border-color:var(--text);font-weight:600}
 .chips button:disabled{color:#b0b0b0;cursor:default}
+input[type=color]{height:34px;padding:2px}
+.panel [hidden]{display:none}
