@@ -6,6 +6,7 @@
 <title>Medsos AU Studio</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="ao3-workskin.css">
+<style id="dyn"></style>
 </head>
 <body>
 <header class="bar">
@@ -16,9 +17,28 @@
 </header>
 <main class="app">
 <aside class="panel" aria-label="Editor">
+  <div data-for="wa" class="wallpaper">
+    <label>WhatsApp wallpaper
+      <select data-k="wabg"><option value="doodle">Pattern</option><option value="plain">Plain beige</option><option value="dark">Dark mode</option><option value="custom">Custom color / URL</option></select>
+    </label>
+    <div id="wacustom" hidden>
+      <label>Wallpaper color<input type="color" data-k="wacolor"></label>
+      <label>Wallpaper image URL (optional)<input data-k="waimg" placeholder="https://files.catbox.moe/…"></label>
+      <p class="hint">A custom wallpaper adds one extra rule to the end of the Work Skin CSS. Re-copy the CSS after changing it.</p>
+    </div>
+  </div>
   <div data-for="wa ig im"><label>Contact name<input data-k="name"></label></div>
   <div data-for="wa"><label>Status line<input data-k="status"></label></div>
-  <div data-for="wa ig"><label class="drop">Profile picture<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-f="av"></label></div>
+  <div data-for="im">
+    <label class="check"><input type="checkbox" data-k="showSt"> Show status line</label>
+    <label>Status<input data-k="istatus" placeholder="iMessage, Active now, Text Message"></label>
+    <label>Timestamp<input data-k="time"></label>
+    <label class="check"><input type="checkbox" data-k="sms"> Sent as SMS (green)</label>
+  </div>
+  <div data-for="wa ig im">
+    <label>Contact picture URL<input data-k="av" placeholder="https://i.imgur.com/…"></label>
+    <label class="drop">Or upload to preview<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-f="av"></label>
+  </div>
   <div data-for="twitter">
     <label>Theme<select data-k="theme"><option value="light">Light</option><option value="dim">Dim</option><option value="dark">Dark</option></select></label>
     <div class="chips" id="ttabs" role="group" aria-label="Tweets in thread"></div>
@@ -27,24 +47,25 @@
     <label>Handle<input data-t="handle"></label>
     <label>Tweet text<textarea data-t="text" rows="4"></textarea></label>
     <label>Time<input data-t="time"></label>
-    <label class="drop">Profile picture<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-ft="av"></label>
-    <label class="drop">Attached image<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-ft="img"></label>
+    <label>Profile picture URL<input data-t="av" placeholder="https://i.imgur.com/…"></label>
+    <label class="drop">Or upload to preview<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-ft="av"></label>
+    <label>Attached image URL<input data-t="img" placeholder="https://files.catbox.moe/…"></label>
+    <label class="drop">Or upload to preview<span>Drop an image or click to choose</span><input type="file" accept="image/*" data-ft="img"></label>
     <div class="grid2">
       <label>Replies<input data-t="replies"></label><label>Reposts<input data-t="reposts"></label>
       <label>Likes<input data-t="likes"></label><label>Views<input data-t="views"></label>
     </div>
   </div>
-  <div data-for="im"><label>Timestamp<input data-k="time"></label><label class="check"><input type="checkbox" data-k="sms"> Sent as SMS (green)</label></div>
   <div data-for="wa ig im">
     <label>Messages<textarea data-k="chat" rows="8"></textarea></label>
     <p class="hint">One message per line. Start a line with &gt; for sent messages. Add “ | 9:41 AM” to set a time. Format with **bold**, *italic*, or &lt;u&gt;underline&lt;/u&gt;.</p>
   </div>
   <div data-for="wa im">
-    <label class="drop">Photos<span id="pcount"></span><input type="file" accept="image/*" multiple data-fp></label>
-    <div class="chips"><button type="button" id="pclear">Remove all photos</button></div>
-    <p class="hint">Put a photo in a chat with a line like &gt; [photo 1] optional caption | 1:14 AM. Leave out the &gt; for a received photo.</p>
+    <label>Photo URLs (one per line)<textarea data-k="photoUrls" rows="3" placeholder="https://i.imgur.com/abc.jpg&#10;https://files.catbox.moe/xyz.png"></textarea></label>
+    <p class="hint">Use direct image links from Catbox, Imgur or similar. Put a photo in a chat with &gt; [photo 1] caption | 1:14 AM, or paste the link right in the line: [photo https://…]. Leave out &gt; for a received photo.</p>
   </div>
   <div data-for="nt">
+    <label>Folder name (top left)<input data-k="nfolder"></label>
     <label>Date line (optional)<input data-k="ndate"></label>
     <label>Title<input data-k="title"></label>
     <label>Note<textarea data-k="note" rows="10"></textarea></label>
@@ -56,7 +77,7 @@
   <div class="code">
     <div><div class="row"><span>AO3 HTML</span><button data-copy="html">Copy AO3 HTML</button></div><textarea id="html" readonly spellcheck="false"></textarea></div>
     <div><div class="row"><span>Work Skin CSS</span><button data-copy="css">Copy Workskin CSS</button></div><textarea id="css" readonly spellcheck="false"></textarea></div>
-    <p class="hint wide">AO3 blocks uploaded images and Base64. Host your images elsewhere, then replace each https://YOUR-IMAGE-URL-… placeholder in the HTML with the real link.</p>
+    <p class="hint wide">Images use the URLs you enter, so the exported HTML points at your own hosting. Uploaded files only preview locally and export as a https://YOUR-IMAGE-URL-… placeholder to swap for a real link.</p>
   </div>
 </section>
 </main>
