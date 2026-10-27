@@ -76,7 +76,11 @@ const R = {
 const customCss = exp => {
   if (S.p !== 'wa') return '';
   const col = waColor(); let d = '';
-  if (S.wabg === 'doodle') d = `background-color:${col};background-image:${doodle(col)};background-size:40px 40px`;
+  if (S.wabg === 'doodle') {
+    /*hi here is also another catbox file. it exploded did it?*/
+    const imgUrl = exp ? 'https://files.catbox.moe/7rrj0w.jpg' : 'whatsapp-doodle.jpg';
+    d = `background-color:${col};background-image:url("${imgUrl}");background-size:cover;background-position:center;background-blend-mode:multiply`;
+  }
   else if (S.wabg === 'solid') d = `background-color:${col}`;
   else if (S.wabg === 'image') { const u = wallUrl(exp); d = `background-color:${col}${u ? `;background-image:url(${u});background-size:cover;background-position:center` : ''}`; }
   return d ? `#workskin .wa-bg-custom{${d}}` : '';
