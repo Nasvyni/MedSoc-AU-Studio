@@ -41,3 +41,4 @@ textarea{resize:vertical}
 .chips button:disabled{color:#b0b0b0;cursor:default}
 input[type=color]{height:34px;padding:2px}
 .panel [hidden]{display:none}
+.wallpaper{margin-bottom:16px;padding:12px 12px 0;border:1px solid var(--line);border-radius:8px;background:#f5f5f6}
