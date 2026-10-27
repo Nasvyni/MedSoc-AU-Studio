@@ -64,8 +64,12 @@ const wallUrl = exp => {
   return /^https?:\/\//i.test(u) ? u.replace(/[()'";\s]/g, '') : '';
 };
 const R = {
-  twitter: e => `<div class="au twt twt-${S.theme}">${S.tweets.map((t, i) => post(t, i, e)).join('')}</div>`,
-  wa: e => `<div class="au wa ${waClass()}"><div class="wa-top">${avatar('wa-av', S.av, e, 'avatar')}<div class="wa-who"><span class="wa-title">${esc(S.name)}</span><span class="wa-status">${esc(S.status)}</span></div></div><div class="wa-body">${msgs().map(m => row('wa', m, `<div class="wa-bub${m.photo ? ' wa-pb' : ''}">${m.photo ? pic('wa-pic', m.photo) : ''}${fmt(m.t)}<span class="wa-time">${esc(m.time)}${m.out ? ' <span class="wa-tick">✓✓</span>' : ''}</span></div>`)).join('')}</div></div>`,
+  twitter: e => `<div class="au twt twt-${S.theme}">${S.tweets.map((t, i) => post(t, i, e)).join('')}</div>`
+wa: e => `<div class="au wa ${waClass()}">
+  <div class="wa-bg-layer"><img src="https://files.catbox.moe/7rrj0w.jpg" alt=""></div>
+  <div class="wa-top">...</div>
+  <div class="wa-body">...</div>
+</div>`
   im: e => `<div class="au im"><div class="im-top"><span class="im-back">‹</span><span class="im-call"><span class="im-cam"><span class="im-cam-b"></span><span class="im-cam-l"></span></span></span><div class="im-who">${S.av ? avatar('im-av', S.av, e, 'avatar') : `<span class="im-av">${esc((S.name.trim()[0] || '?').toUpperCase())}</span>`}<span class="im-name">${esc(S.name)}<span class="im-chev"> ›</span></span>${S.showSt && S.istatus ? `<span class="im-status">${esc(S.istatus)}</span>` : ''}</div></div><div class="im-body"><div class="im-time">${esc(S.time)}</div>${msgs().map(m => {
     const dir = m.out ? 'out' : 'in';
     return (m.photo ? `<div class="im-row im-${dir}">${pic('im-pic', m.photo)}</div>` : '') + (m.t ? row('im', m, `<div class="im-bub">${fmt(m.t)}</div>`, m.out && S.sms ? ' im-sms' : '') : '');
