@@ -1,11 +1,13 @@
 const $ = s => document.querySelector(s);
 const newTweet = () => ({ name: 'New reply', handle: 'handle', text: '', priv: false, time: '1h', replies: '0', reposts: '0', likes: '0', views: '0', av: '', img: '' });
 const S = {
-  p: 'twitter', ti: 0, theme: 'dim', name: 'WEIRD HALF-ALIEN THAT I LUV', status: 'online', time: 'Today 1:11 AM', sms: false, av: '', photos: [],
+  p: 'twitter', ti: 0, theme: 'dim',
+  name: 'WEIRD HALF-ALIEN THAT I LUV', status: 'online', showSt: true, istatus: 'iMessage', time: 'Today 1:11 AM', sms: false,
+  av: '', photoUrls: '', wabg: 'doodle', wacolor: '#efeae2', waimg: '',
   chat: `> Don't grieve, Admiral. It is logical. The needs of the many outweigh... | 1:11 AM
 ...the needs of the few. | 1:12 AM
 > Or the one. You are my superior officer. You are also my friend. I have been and always shall be yours | 1:13 AM`,
-  ndate: '', title: '21 September, 2256',
+  nfolder: 'Notes', ndate: '', title: '21 September, 2256',
   note: `*Oh, how I miss her.*
 **Ding-dong.**
 
@@ -17,40 +19,53 @@ I step up to the doorstep. "Hi." It is the only word I can manage- her long, sil
     { name: 'Mari Loves Asuka!', handle: 'Marithebest!', text: 'simp. ugh.', priv: false, time: '1h', replies: '0', reposts: '0', likes: '12', views: '340', av: '', img: '' }
   ]
 };
+let BASE_CSS = '';
 const T = () => S.tweets[S.ti];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])).replace(/\n/g, '<br>');
-// escape first then get ** and **** to html tags so ao3 ok
+const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+// Escapes first, then turns **b**, *i* and <b>/<i>/<u> into plain tags AO3 accepts.
 const fmt = s => esc(s)
   .replace(/&lt;(\/?)(b|i|u)&gt;/gi, (m, x, t) => `<${x}${t.toLowerCase()}>`)
   .replace(/\*\*([^*]+?)\*\*/g, '<b>$1</b>')
   .replace(/\*([^*]+?)\*/g, '<i>$1</i>');
-const src = (d, e, tag) => e ? `https://YOUR-IMAGE-URL-${tag}` : d;
-const avatar = (c, d, e, tag) => d ? `<img class="${c}" src="${src(d, e, tag)}" alt="">` : `<span class="${c}"></span>`;
-const pic = (c, n, e) => S.photos[n - 1] ? `<img class="${c}" src="${src(S.photos[n - 1], e, 'photo-' + n)}" alt="">` : `<span class="${c} ph"></span>`;
+// URLs are used as-is. Locally uploaded files (data: URIs) only preview and export as a placeholder.
+const src = (d, e, tag) => e && /^data:/i.test(d) ? `https://YOUR-IMAGE-URL-${tag}` : d;
+const avatar = (c, d, e, tag) => d ? `<img class="${c}" src="${attr(src(d, e, tag))}" alt="">` : `<span class="${c}"></span>`;
+const photos = () => S.photoUrls.split('\n').map(s => s.trim()).filter(Boolean);
+const photoSrc = a => /^https?:\/\//i.test(a) ? a : (photos()[(+a || 1) - 1] || '');
+const pic = (c, a) => { const u = photoSrc(a); return u ? `<img class="${c}" src="${attr(u)}" alt="">` : `<span class="${c} ph"></span>`; };
 const msgs = () => {
   const P = S.chat.split('\n').filter(l => l.trim()).map(l => {
     const out = l[0] === '>'; l = (out ? l.slice(1) : l).trim();
     const k = l.lastIndexOf(' | ');
-    let t = k > 0 ? l.slice(0, k) : l; const time = k > 0 ? l.slice(k + 3) : '';
-    const m = t.match(/^\[photo(?: (\d+))?\]\s*(.*)$/i);
-    return { out, time, t: m ? m[2] : t, photo: m ? +(m[1] || 1) : 0 };
+    const t = k > 0 ? l.slice(0, k) : l, time = k > 0 ? l.slice(k + 3) : '';
+    const m = t.match(/^\[photo(?:\s+(\d+|https?:\/\/[^\]\s]+))?\]\s*(.*)$/i);
+    return { out, time, t: m ? m[2] : t, photo: m ? (m[1] || '1') : '' };
   });
   return P.map((m, i) => ({ ...m, first: !i || P[i - 1].out !== m.out }));
 };
 const lock = '<span class="twt-lock"><span class="twt-lock-sh"></span><span class="twt-lock-bd"></span></span>';
 const post = (t, i, e) => {
   const next = i < S.tweets.length - 1;
-  return `<div class="twt-post${i ? ' twt-cont' : ''}"><div class="twt-side">${avatar('twt-av', t.av, e, `tweet-${i + 1}-avatar`)}${next ? '<span class="twt-line"></span>' : ''}</div><div class="twt-main"><div class="twt-top"><span class="twt-name">${esc(t.name)}${t.priv ? lock : ''}</span><span class="twt-sub twt-handle">@${esc(t.handle)} · ${esc(t.time)}</span></div><div class="twt-text">${fmt(t.text)}</div>${t.img ? `<img class="twt-img" src="${src(t.img, e, `tweet-${i + 1}-image`)}" alt="">` : ''}<div class="twt-act twt-sub"><span><b>${esc(t.replies)}</b> Replies</span><span><b>${esc(t.reposts)}</b> Reposts</span><span><b>${esc(t.likes)}</b> Likes</span><span><b>${esc(t.views)}</b> Views</span></div></div></div>`;
+  return `<div class="twt-post${i ? ' twt-cont' : ''}"><div class="twt-side">${avatar('twt-av', t.av, e, `tweet-${i + 1}-avatar`)}${next ? '<span class="twt-line"></span>' : ''}</div><div class="twt-main"><div class="twt-top"><span class="twt-name">${esc(t.name)}${t.priv ? lock : ''}</span><span class="twt-sub twt-handle">@${esc(t.handle)} · ${esc(t.time)}</span></div><div class="twt-text">${fmt(t.text)}</div>${t.img ? `<img class="twt-img" src="${attr(src(t.img, e, `tweet-${i + 1}-image`))}" alt="">` : ''}<div class="twt-act twt-sub"><span><b>${esc(t.replies)}</b> Replies</span><span><b>${esc(t.reposts)}</b> Reposts</span><span><b>${esc(t.likes)}</b> Likes</span><span><b>${esc(t.views)}</b> Views</span></div></div></div>`;
 };
+const waClass = () => ({ dark: 'wa-dark', plain: 'wa-bg-plain', custom: 'wa-bg-custom' }[S.wabg] || 'wa-bg-doodle');
 const R = {
   twitter: e => `<div class="au twt twt-${S.theme}">${S.tweets.map((t, i) => post(t, i, e)).join('')}</div>`,
-  wa: e => `<div class="au wa"><div class="wa-top">${avatar('wa-av', S.av, e, 'avatar')}<div><span class="wa-title">${esc(S.name)}</span><span class="wa-status">${esc(S.status)}</span></div></div><div class="wa-body">${msgs().map(m => `<div class="wa-row wa-${m.out ? 'out' : 'in'}"><div class="wa-bub${m.first ? ' wa-tail' : ''}${m.photo ? ' wa-pb' : ''}">${m.photo ? pic('wa-pic', m.photo, e) : ''}${fmt(m.t)}<span class="wa-time">${esc(m.time)}${m.out ? ' <span class="wa-tick">✓✓</span>' : ''}</span></div></div>`).join('')}</div></div>`,
-  im: e => `<div class="au im"><div class="im-top">${esc(S.name)}</div><div class="im-time">${esc(S.time)}</div>${msgs().map(m => {
+  wa: e => `<div class="au wa ${waClass()}"><div class="wa-top">${avatar('wa-av', S.av, e, 'avatar')}<div class="wa-who"><span class="wa-title">${esc(S.name)}</span><span class="wa-status">${esc(S.status)}</span></div></div><div class="wa-body">${msgs().map(m => `<div class="wa-row wa-${m.out ? 'out' : 'in'}"><div class="wa-bub${m.first ? ' wa-tail' : ''}${m.photo ? ' wa-pb' : ''}">${m.photo ? pic('wa-pic', m.photo) : ''}${fmt(m.t)}<span class="wa-time">${esc(m.time)}${m.out ? ' <span class="wa-tick">✓✓</span>' : ''}</span></div></div>`).join('')}</div></div>`,
+  im: e => `<div class="au im"><div class="im-top">${avatar('im-av', S.av, e, 'avatar')}<span class="im-name">${esc(S.name)}<span class="im-chev"> ›</span></span>${S.showSt && S.istatus ? `<span class="im-status">${esc(S.istatus)}</span>` : ''}</div><div class="im-body"><div class="im-time">${esc(S.time)}</div>${msgs().map(m => {
     const c = `im-row ${m.out ? 'im-out' : 'im-in'}${m.out && S.sms ? ' im-sms' : ''}`;
-    return (m.photo ? `<div class="${c}">${pic('im-pic', m.photo, e)}</div>` : '') + (m.t ? `<div class="${c}"><div class="im-bub">${fmt(m.t)}</div></div>` : '');
-  }).join('')}</div>`,
+    return (m.photo ? `<div class="${c}">${pic('im-pic', m.photo)}</div>` : '') + (m.t ? `<div class="${c}"><div class="im-bub">${fmt(m.t)}</div></div>` : '');
+  }).join('')}</div></div>`,
   ig: e => `<div class="au ig"><div class="ig-top">${avatar('ig-av', S.av, e, 'avatar')}<span class="ig-name">${esc(S.name)}</span></div>${msgs().map(m => `<div class="ig-row ig-${m.out ? 'out' : 'in'}"><div class="ig-bub">${fmt(m.t)}</div></div>`).join('')}</div>`,
-  nt: e => `<div class="au nt">${S.ndate ? `<div class="nt-date">${esc(S.ndate)}</div>` : ''}<div class="nt-title">${esc(S.title)}</div><div class="nt-body">${fmt(S.note)}</div></div>`
+  nt: e => `<div class="au nt"><div class="nt-bar"><span class="nt-back"><span class="nt-chev">‹</span> ${esc(S.nfolder)}</span><span class="nt-icons"><span class="nt-ic nt-share">↑</span><span class="nt-ic">•••</span></span></div><div class="nt-page">${S.ndate ? `<div class="nt-date">${esc(S.ndate)}</div>` : ''}<div class="nt-title">${esc(S.title)}</div><div class="nt-body">${fmt(S.note)}</div></div></div>`
+};
+// Extra rule for a custom WhatsApp background (AO3 has no inline styles, so it goes in the Work Skin CSS).
+const customCss = () => {
+  if (S.p !== 'wa' || S.wabg !== 'custom') return '';
+  const u = S.waimg.trim().replace(/[()'";\s]/g, '');
+  const col = /^#[0-9a-f]{3,8}$/i.test(S.wacolor) ? S.wacolor : '#efeae2';
+  return `#workskin .wa-bg-custom{background-color:${col}${/^https?:\/\//i.test(u) ? `;background-image:url(${u});background-size:cover` : ''}}`;
 };
 function chips() {
   const box = $('#ttabs'); box.innerHTML = '';
@@ -60,9 +75,12 @@ function chips() {
   add('Remove this tweet', () => { S.tweets.splice(S.ti, 1); S.ti = Math.min(S.ti, S.tweets.length - 1); fill(); draw(); }, undefined, S.tweets.length < 2);
 }
 function draw() {
+  const extra = customCss();
+  $('#dyn').textContent = extra;
   $('#out').innerHTML = R[S.p](false);
   $('#html').value = R[S.p](true);
-  $('#pcount').textContent = S.photos.length ? `${S.photos.length} attached. Use [photo 1]${S.photos.length > 1 ? ` to [photo ${S.photos.length}]` : ''} in the messages.` : 'Drop images or click to choose';
+  $('#css').value = BASE_CSS + (extra ? `\n\n/* Custom WhatsApp background */\n${extra}\n` : '');
+  $('#wacustom').hidden = S.wabg !== 'custom';
   document.querySelectorAll('[data-for]').forEach(g => g.hidden = !g.dataset.for.split(' ').includes(S.p));
   document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.p === S.p));
   chips();
@@ -70,7 +88,8 @@ function draw() {
 function fill() {
   document.querySelectorAll('[data-k],[data-t]').forEach(el => {
     const o = el.dataset.t ? T() : S, k = el.dataset.t || el.dataset.k;
-    el.type === 'checkbox' ? el.checked = o[k] : el.value = o[k];
+    if (el.type === 'checkbox') el.checked = o[k];
+    else el.value = /^data:/i.test(o[k]) ? '' : o[k];
   });
 }
 document.querySelectorAll('#tabs button').forEach(b => b.onclick = () => { S.p = b.dataset.p; draw(); });
@@ -80,29 +99,25 @@ document.querySelectorAll('[data-k],[data-t]').forEach(el => {
     o[k] = el.type === 'checkbox' ? el.checked : el.value; draw();
   };
 });
-const read = (f, cb) => {
+const take = (i, f) => {
   if (!f || !f.type.startsWith('image/')) return;
-  const r = new FileReader(); r.onload = () => { cb(r.result); draw(); }; r.readAsDataURL(f);
+  const r = new FileReader();
+  r.onload = () => { (i.dataset.ft ? T() : S)[i.dataset.ft || i.dataset.f] = r.result; fill(); draw(); };
+  r.readAsDataURL(f);
 };
-const take = (i, files) => [...files].forEach(f => read(f, d => {
-  if (i.hasAttribute('data-fp')) S.photos.push(d);
-  else if (i.dataset.ft) T()[i.dataset.ft] = d;
-  else S[i.dataset.f] = d;
-}));
 document.querySelectorAll('.drop input').forEach(i => {
   const z = i.closest('.drop');
-  i.onchange = () => { take(i, i.files); i.value = ''; };
+  i.onchange = () => { take(i, i.files[0]); i.value = ''; };
   ['dragover', 'dragleave', 'drop'].forEach(ev => z.addEventListener(ev, e => {
     e.preventDefault(); z.classList.toggle('over', ev === 'dragover');
-    if (ev === 'drop') take(i, e.dataTransfer.files);
+    if (ev === 'drop') take(i, e.dataTransfer.files[0]);
   }));
 });
-$('#pclear').onclick = () => { S.photos = []; draw(); };
 document.querySelectorAll('[data-copy]').forEach(b => b.onclick = async () => {
   const t = $('#' + b.dataset.copy); t.select();
   try { await navigator.clipboard.writeText(t.value); } catch { document.execCommand('copy'); }
   const o = b.textContent; b.textContent = 'Copied'; setTimeout(() => b.textContent = o, 1400);
 });
-fetch('ao3-workskin.css').then(r => r.text()).then(t => $('#css').value = t)
-  .catch(() => $('#css').value = 'Open this page over http(s), such as GitHub Pages, to load the CSS here. You can also copy ao3-workskin.css directly.');
+fetch('ao3-workskin.css').then(r => r.text()).then(t => { BASE_CSS = t; draw(); })
+  .catch(() => { BASE_CSS = '/* Open this page over http(s), such as GitHub Pages, to load the CSS here. You can also copy ao3-workskin.css directly. */'; draw(); });
 fill(); draw();
