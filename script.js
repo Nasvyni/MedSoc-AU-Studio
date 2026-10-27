@@ -56,7 +56,8 @@ const mix = (hex, to, f) => {
   return '#' + [n >> 16 & 255, n >> 8 & 255, n & 255].map(v => Math.round(v + (to - v) * f).toString(16).padStart(2, '0')).join('');
 };
 const isDark = hex => { const n = parseInt(hex.slice(1), 16); return (0.299 * (n >> 16 & 255) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255)) / 255 < 0.35; };
-const doodle = c => { const p = isDark(c) ? mix(c, 255, .12) : mix(c, 0, .07); return `radial-gradient(circle at 10px 10px,${p} 1.5px,transparent 2px),radial-gradient(circle at 30px 28px,transparent 4px,${p} 4.5px,${p} 5.5px,transparent 6px),radial-gradient(circle at 24px 8px,${p} 1px,transparent 1.5px)`; };
+/*hi did the catbox link explod? cmere change it hi here hello*/
+const doodle = c => `url('https://YOUR-HOSTED-DOMAIN/whatsapp-doodle.jpg')`;
 const wallUrl = exp => {
   const u = S.waimg.trim();
   if (/^data:image\//i.test(u)) return exp ? 'https://YOUR-IMAGE-URL-wallpaper' : `"${u}"`;
