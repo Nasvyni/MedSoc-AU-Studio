@@ -23,12 +23,10 @@ let BASE_CSS = '';
 const T = () => S.tweets[S.ti];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])).replace(/\n/g, '<br>');
 const attr = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
-// Escapes first, then turns **b**, *i* and <b>/<i>/<u> into plain tags AO3 accepts.
 const fmt = s => esc(s)
   .replace(/&lt;(\/?)(b|i|u)&gt;/gi, (m, x, t) => `<${x}${t.toLowerCase()}>`)
   .replace(/\*\*([^*]+?)\*\*/g, '<b>$1</b>')
   .replace(/\*([^*]+?)\*/g, '<i>$1</i>');
-// URLs are used as-is. Locally uploaded files (data: URIs) only preview and export as a placeholder.
 const src = (d, e, tag) => e && /^data:/i.test(d) ? `https://YOUR-IMAGE-URL-${tag}` : d;
 const avatar = (c, d, e, tag) => d ? `<img class="${c}" src="${attr(src(d, e, tag))}" alt="">` : `<span class="${c}"></span>`;
 const photos = () => S.photoUrls.split('\n').map(s => s.trim()).filter(Boolean);
@@ -49,7 +47,6 @@ const post = (t, i, e) => {
   const next = i < S.tweets.length - 1;
   return `<div class="twt-post${i ? ' twt-cont' : ''}"><div class="twt-side">${avatar('twt-av', t.av, e, `tweet-${i + 1}-avatar`)}${next ? '<span class="twt-line"></span>' : ''}</div><div class="twt-main"><div class="twt-top"><span class="twt-name">${esc(t.name)}${t.priv ? lock : ''}</span><span class="twt-sub twt-handle">@${esc(t.handle)} · ${esc(t.time)}</span></div><div class="twt-text">${fmt(t.text)}</div>${t.img ? `<img class="twt-img" src="${attr(src(t.img, e, `tweet-${i + 1}-image`))}" alt="">` : ''}<div class="twt-act twt-sub"><span><b>${esc(t.replies)}</b> Replies</span><span><b>${esc(t.reposts)}</b> Reposts</span><span><b>${esc(t.likes)}</b> Likes</span><span><b>${esc(t.views)}</b> Views</span></div></div></div>`;
 };
-// Chat row with a tail (nub) on the sender's side; the matching bubble corner is squared off in CSS.
 const row = (p, m, bub, x = '') => `<div class="${p}-row ${p}-${m.out ? 'out' : 'in'}${x}">${m.out ? bub + `<div class="${p}-nub"></div>` : `<div class="${p}-nub"></div>` + bub}</div>`;
 const WA_DEFAULT = '#efeae2';
 const waColor = () => /^#[0-9a-f]{6}$/i.test(S.wacolor) ? S.wacolor : WA_DEFAULT;
@@ -59,7 +56,6 @@ const mix = (hex, to, f) => {
   return '#' + [n >> 16 & 255, n >> 8 & 255, n & 255].map(v => Math.round(v + (to - v) * f).toString(16).padStart(2, '0')).join('');
 };
 const isDark = hex => { const n = parseInt(hex.slice(1), 16); return (0.299 * (n >> 16 & 255) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255)) / 255 < 0.35; };
-// Doodle layers (dots and rings) drawn in a shade of the chosen tint.
 const doodle = c => { const p = isDark(c) ? mix(c, 255, .12) : mix(c, 0, .07); return `radial-gradient(circle at 10px 10px,${p} 1.5px,transparent 2px),radial-gradient(circle at 30px 28px,transparent 4px,${p} 4.5px,${p} 5.5px,transparent 6px),radial-gradient(circle at 24px 8px,${p} 1px,transparent 1.5px)`; };
 const wallUrl = exp => {
   const u = S.waimg.trim();
@@ -76,11 +72,10 @@ const R = {
   ig: e => `<div class="au ig"><div class="ig-top">${avatar('ig-av', S.av, e, 'avatar')}<span class="ig-name">${esc(S.name)}</span></div>${msgs().map(m => row('ig', m, `<div class="ig-bub">${fmt(m.t)}</div>`)).join('')}</div>`,
   nt: e => `<div class="au nt"><div class="nt-bar"><span class="nt-back"><span class="nt-chev">‹</span> ${esc(S.nfolder)}</span><span class="nt-tools"><span class="nt-cap"><span class="nt-ci">↩</span><span class="nt-ci">⎋</span><span class="nt-ci nt-dots">•••</span></span><span class="nt-done">✓</span></span></div><div class="nt-page">${S.ndate ? `<div class="nt-date">${esc(S.ndate)}</div>` : ''}<div class="nt-title">${esc(S.title)}</div><div class="nt-body">${fmt(S.note)}</div></div></div>`
 };
-// Extra rule for the WhatsApp wallpaper (AO3 has no inline styles, so it goes in the Work Skin CSS).
 const customCss = exp => {
   if (S.p !== 'wa') return '';
   const col = waColor(); let d = '';
-  if (S.wabg === 'doodle' && col.toLowerCase() !== WA_DEFAULT) d = `background-color:${col};background-image:${doodle(col)};background-size:40px 40px`;
+  if (S.wabg === 'doodle') d = `background-color:${col};background-image:${doodle(col)};background-size:40px 40px`;
   else if (S.wabg === 'solid') d = `background-color:${col}`;
   else if (S.wabg === 'image') { const u = wallUrl(exp); d = `background-color:${col}${u ? `;background-image:url(${u});background-size:cover;background-position:center` : ''}`; }
   return d ? `#workskin .wa-bg-custom{${d}}` : '';
