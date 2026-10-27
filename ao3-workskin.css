@@ -43,7 +43,12 @@
 /* WhatsApp */
 #workskin .wa{background-color:#efeae2;border-radius:8px;font-size:14.2px}
 #workskin .wa-bg-plain{background-color:#efeae2}
-#workskin .wa-bg-doodle{background-color:#efeae2;background-image:radial-gradient(circle at 10px 10px,#ddd5c8 1.5px,transparent 2px),radial-gradient(circle at 30px 28px,transparent 4px,#ddd5c8 4.5px,#ddd5c8 5.5px,transparent 6px),radial-gradient(circle at 24px 8px,#ddd5c8 1px,transparent 1.5px);background-size:40px 40px}
+#workskin .wa-bg-doodle {
+  background-color: #efeae2;
+  background-image: url('whatsapp-doodle.jpg');
+  background-size: cover;
+  background-position: center;
+}
 #workskin .wa-top{overflow:hidden;padding:10px 14px;background:#008069;color:#ffffff}
 #workskin .wa-av{display:block;float:left;width:36px;height:36px;margin-right:10px;border-radius:50%;background:#dfe5e7}
 #workskin .wa-who{overflow:hidden}
